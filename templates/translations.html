@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Translation creator | {*site_name}</title>
+    </head>
+    <body>
+        <h1>Generate translation for {$template_filename}</h1>
+        <form action="http://{*site_root}/generate_translations.php" method="post">
+            <table>
+                <tr>
+                    <th>Variable</th>
+                    {for language in languages}
+                    <th>{$language}</th>
+                    {~for}
+                </tr>
+                {for variable in variables}
+                <tr>
+                    <td>{$variable}</td>
+                    {for language in languages}
+                    <td>
+                        <textarea name="{$language}_{$variable}"></textarea>
+                    </td>
+                    {~for}
+                </tr>
+                {~for}
+            </table>
+            <input type="text" name="template_filename" hidden value="{$template_filename}" />
+            <input type="submit" value="Send translations" />
+        </form>
+    </body>
+</html>

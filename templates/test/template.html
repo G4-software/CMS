@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{@title} | {*site_name}</title>
+    </head>
+    <body>
+        <h1>{@greeting}</h1>
+        <p>{@description_line}</p>
+        <!-- This line is followed by comment line in the template -->
+        {//} Commented line. This is not shown in returned HTML
+        <ul>
+            <li>{$global_variable}</li>
+            <li>{$object.member_variable}</li>
+            <li>
+                {#test/include.html}
+            </li>
+            <li>Templater supports following comparsions: ==, !=, <=, >=, <, ></li>
+            <li>
+                {if operand1 == operand2.member}
+                This line is shown only if operand1 and member of operand2 are equal
+                {~if}
+            </li>
+            <li>
+                <ul>
+                    {for member in array}
+                    <li>{$member}</li>
+                    {~for}
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    {for member in object.member_array}
+                    <li>{$member}</li>
+                    {~for}
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>

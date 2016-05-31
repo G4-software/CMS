@@ -4,5 +4,9 @@
     error_reporting(E_ALL);
 
     require_once $_SERVER['DOCUMENT_ROOT']."/config/db_connect.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/config/global_vars.php";
 
+    $site_languages = array("ru","en");
+    define("SITE_LANGUAGES",$site_languages);
+    define("GLOBAL_VARS",$global_vars);
     define("TEMPLATE_DIR",$_SERVER['DOCUMENT_ROOT']."/templates/");
