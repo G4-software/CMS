@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{@title} | {*site_name}</title>
+        <title>{@test_page_title} | {*site_name}</title>
     </head>
     <body>
         <h1>{@greeting}</h1>
@@ -18,7 +18,9 @@
             <li>Templater supports following comparsions: ==, !=, <=, >=, <, ></li>
             <li>
                 {if operand1 == operand2.member}
-                This line is shown only if operand1 and member of operand2 are equal
+                This line is shown if operand1 and member of operand2 are equal
+                {else}
+                This line is shown if operand1 and member of operand2 are not equal
                 {~if}
             </li>
             <li>

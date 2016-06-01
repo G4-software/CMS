@@ -59,7 +59,7 @@
             $language_defines[] = "\$language_defines = array (";
             foreach ($language_translations as $label => $translation)
             {
-                $language_defines[] = "'$label' => \"$translation\"";
+                $language_defines[] = "'$label' => \"$translation\",";
             }
             $language_defines[] = ");";
 

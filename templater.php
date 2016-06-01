@@ -120,7 +120,9 @@
             {
                 $template_line = '';
                 $condition_end_regex = '/\{\s*\~\s*if\s*\}/';
+                $else_regex = '/\{\s*else\s*\}/';
                 $condition_content = NULL;
+                $else_content = NULL;
 
                 $condition_counter = 0;
                 do
@@ -135,6 +137,17 @@
                     if(preg_match($condition_end_regex, $template_line))
                     {
                         $condition_counter -= 1;
+                    }
+                    if(preg_match($else_regex, $template_line) && $condition_counter==0)
+                    {
+                        while (!preg_match($condition_end_regex, $template_line))
+                        {
+                            $line_num++;
+                            $template_line = $template[$line_num];
+                            $else_content[] = $template_line;
+                        }
+                        array_pop($else_content);
+                        $condition_counter -=1;
                     }
                 } while ($condition_counter>=0 || !preg_match($condition_end_regex, $template_line));
                 $template_line = '';
@@ -179,12 +192,20 @@
                             {
                                 render($condition_content, $page, "array", $indent);
                             }
+                            else
+                            {
+                                render($else_content, $page, "array", $indent);
+                            }
                             break;
 
                         case '!=':
                             if($first_operand != $second_operand)
                             {
                                 render($condition_content, $page, "array", $indent);
+                            }
+                            else
+                            {
+                                render($else_content, $page, "array", $indent);
                             }
                             break;
 
@@ -193,12 +214,20 @@
                             {
                                 render($condition_content, $page, "array", $indent);
                             }
+                            else
+                            {
+                                render($else_content, $page, "array", $indent);
+                            }
                             break;
 
                         case '>=':
                             if($first_operand >= $second_operand)
                             {
                                 render($condition_content, $page, "array", $indent);
+                            }
+                            else
+                            {
+                                render($else_content, $page, "array", $indent);
                             }
                             break;
 
@@ -207,12 +236,20 @@
                             {
                                 render($condition_content, $page, "array", $indent);
                             }
+                            else
+                            {
+                                render($else_content, $page, "array", $indent);
+                            }
                             break;
 
                         case '>':
                             if($first_operand > $second_operand)
                             {
                                 render($condition_content, $page, "array", $indent);
+                            }
+                            else
+                            {
+                                render($else_content, $page, "array", $indent);
                             }
                             break;
                     }
